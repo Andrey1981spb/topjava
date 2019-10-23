@@ -15,11 +15,13 @@ import static ru.javawebinar.topjava.UserTestData.ADMIN;
 
 public class InMemoryAdminRestControllerTest {
     private static ConfigurableApplicationContext appCtx;
+
     private static AdminRestController controller;
 
     @BeforeClass
     public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        appCtx = new ClassPathXmlApplicationContext(
+                "classpath:spring/spring-app.xml", "spring/spring-db.xml");
         System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
         controller = appCtx.getBean(AdminRestController.class);
     }
@@ -32,6 +34,8 @@ public class InMemoryAdminRestControllerTest {
     @Before
     public void setUp() throws Exception {
         // re-initialize
+        appCtx = new ClassPathXmlApplicationContext(
+                "classpath:spring/test.xml");
         InMemoryUserRepository repository = appCtx.getBean(InMemoryUserRepository.class);
         repository.init();
     }
@@ -44,7 +48,7 @@ public class InMemoryAdminRestControllerTest {
         Assert.assertEquals(users.iterator().next(), ADMIN);
     }
 
-    @Test(expected = NotFoundException.class)
+    @org.junit.Test ( expected = NotFoundException.class )
     public void deleteNotFound() throws Exception {
         controller.delete(10);
     }
