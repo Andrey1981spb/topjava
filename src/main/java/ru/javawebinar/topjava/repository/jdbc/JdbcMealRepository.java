@@ -39,17 +39,17 @@ public class JdbcMealRepository implements MealRepository {
     @Override
     public Meal save(Meal meal, int userId) {
         MapSqlParameterSource map = new MapSqlParameterSource()
+                .addValue("user_id", userId)
                 .addValue("id", meal.getId())
                 .addValue("dateTime", meal.getDateTime())
                 .addValue("description", meal.getDescription())
                 .addValue("calories", meal.getCalories());
         if (meal.isNew()) {
-            map.addValue("id_user",userId);
             Number newKey = insertUser.executeAndReturnKey(map);
             meal.setId(newKey.intValue());
         } else if (namedParameterJdbcTemplate.update(
                 "UPDATE meals SET datetime=:dateTime, description=:description, " +
-                        "calories=:calories WHERE id=:id AND user_id=:userId", map) == 0) {
+                        "calories=:calories WHERE id=:id AND user_id=user_id", map) == 0) {
             return null;
         }
         return meal;
@@ -57,7 +57,7 @@ public class JdbcMealRepository implements MealRepository {
 
     @Override
     public boolean delete(int id, int userId) {
-        return jdbcTemplate.update("DELETE FROM meals WHERE id=? AND user_id=:userId", id, userId) != 0;
+        return jdbcTemplate.update("DELETE FROM meals WHERE id=? AND user_id=?", id, userId) != 0;
     }
 
     @Override
@@ -68,15 +68,13 @@ public class JdbcMealRepository implements MealRepository {
 
     @Override
     public List<Meal> getAll(int userId) {
-        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id=? ORDER BY datetime DESC", ROW_MAPPER, userId);
+        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id=? ORDER BY datetime ASC", ROW_MAPPER, userId);
     }
 
     @Override
     public List<Meal> getBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
-        String start = DateTimeUtil.toString(startDateTime);
-        String end = DateTimeUtil.toString(endDateTime);
         return jdbcTemplate.query("SELECT * FROM meals " +
-                "WHERE user_id=? AND datetime BETWEEN '%s' AND '%s' ORDER BY datetime", ROW_MAPPER, userId, start, end);
+                "WHERE user_id=? AND datetime BETWEEN ? AND ? ORDER BY datetime ASC", ROW_MAPPER, userId, startDateTime, endDateTime);
     }
 }
 

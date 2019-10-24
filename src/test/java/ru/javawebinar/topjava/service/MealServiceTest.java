@@ -21,7 +21,6 @@ import java.util.List;
 import static ru.javawebinar.topjava.MealsTestData.*;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
-
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"
@@ -39,7 +38,7 @@ public class MealServiceTest {
 
     @Test
     public void create() throws Exception {
-        Meal newMeal = new Meal(null, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500);
+        Meal newMeal = new Meal(null, LocalDateTime.of(2016, Month.MAY, 30, 10, 0), "Завтрак", 500);
         Meal created = mealService.create(newMeal, USER_ID);
         newMeal.setId(created.getId());
         assertMatched(mealService.getAll(USER_ID), MEAL1, MEAL2, MEAL3, MEAL4, MEAL5, MEAL6, created);
@@ -72,8 +71,8 @@ public class MealServiceTest {
     @Test
     public void getBetweenDates() throws Exception {
         List<Meal> expected = new ArrayList<>(Arrays.asList(MEAL1, MEAL2, MEAL3));
-        List<Meal> actual = mealService.getBetweenDates(LocalDate.of(2015, Month.JUNE, 1),
-                LocalDate.of(2015, Month.JUNE, 30), USER_ID);
+        List<Meal> actual = mealService.getBetweenDates(LocalDate.of(2015, Month.MAY, 30),
+                LocalDate.of(2015, Month.MAY, 30), USER_ID);
         assertMatched(actual, expected);
     }
 
