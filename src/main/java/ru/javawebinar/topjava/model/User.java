@@ -56,6 +56,9 @@ public class User extends AbstractNamedEntity {
     @Range(min = 10, max = 10000)
     private int caloriesPerDay = DEFAULT_CALORIES_PER_DAY;
 
+    @OneToMany(mappedBy="user")
+    private Set<Meal> meals;
+
     public User() {
     }
 
