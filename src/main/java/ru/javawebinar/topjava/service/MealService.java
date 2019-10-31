@@ -19,7 +19,6 @@ import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 public class MealService {
 
     @Autowired
-    @Qualifier("jpaMealRepository")
     private final MealRepository repository;
 
     public MealService(MealRepository repository) {

@@ -1,10 +1,9 @@
 package ru.javawebinar.topjava.model;
 
-import ru.javawebinar.topjava.util.LocalDatePersistenceConverter;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -12,6 +11,7 @@ import java.time.LocalTime;
 @NamedQueries({
         @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:user_id"),
         @NamedQuery(name = Meal.GET, query = "SELECT m FROM Meal m WHERE m.id=:id AND m.user.id=:user_id"),
+        @NamedQuery(name = Meal.GET_BY_ID, query = "SELECT m FROM Meal m WHERE m.id=:id"),
         @NamedQuery(name = Meal.GET_ALL_SORTED, query = "SELECT m FROM Meal m WHERE m.user.id=:user_id ORDER BY m.dateTime DESC"),
         @NamedQuery(name = Meal.BETWEEN, query = "SELECT m FROM Meal m " +
                 "WHERE m.user.id=:user_id AND m.dateTime BETWEEN :min AND :max ORDER BY m.dateTime DESC")
@@ -23,24 +23,26 @@ public class Meal extends AbstractBaseEntity {
 
     public static final String DELETE = "Meal.delete";
     public static final String GET = "Meal.get";
+    public static final String GET_BY_ID = "Meal.getById";
     public static final String GET_ALL_SORTED = "Meal.getAllSorted";
     public static final String BETWEEN = "Meal.getBetweenDate";
 
     @Column(name = "date_time", nullable = false)
     @NotNull
-    @Convert(converter = LocalDatePersistenceConverter.class)
     private LocalDateTime dateTime;
 
     @Column(name = "description", nullable = false)
     @NotBlank
+    @Size(min = 5, max = 1000)
     private String description;
 
-    @Column(name = "calories", nullable = false)
-    @NotNull
+    @Column(name = "calories")
+    @Range(min = 1, max = 1000)
     private int calories;
 
     @ManyToOne
     @JoinColumn (name="user_id")
+    @NotNull (message = "not null")
     private User user;
 
     public Meal() {

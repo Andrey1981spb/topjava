@@ -17,7 +17,6 @@ import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 public class UserService {
 
     @Autowired
-    @Qualifier("jpaUserRepository")
     private final UserRepository repository;
 
     @Autowired
