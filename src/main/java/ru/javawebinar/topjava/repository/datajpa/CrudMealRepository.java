@@ -27,7 +27,6 @@ public interface CrudMealRepository extends JpaRepository<Meal, Integer> {
     Meal getByIdAndUserId (int id, int userId);
 
     @Transactional
-    @Modifying
     @Query(name = Meal.ALL_SORTED)
     List<Meal> getAll(@Param("userId") int userId);
 
