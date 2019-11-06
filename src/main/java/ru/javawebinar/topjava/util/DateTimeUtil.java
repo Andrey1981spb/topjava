@@ -27,3 +27,6 @@ public class DateTimeUtil {
     }
 }
 
+    public static LocalDateTime getEndExclusive(LocalDate localDate) {
+        return startOfDay(localDate != null ? localDate.plus(1, ChronoUnit.DAYS) : MAX_DATE);
+    }
