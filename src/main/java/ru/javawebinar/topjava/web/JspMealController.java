@@ -77,7 +77,7 @@ public class JspMealController extends AbstractController {
         } else {
             service.update(meal, SecurityUtil.authUserId());
         }
-        return "redirect:/meals";
+        return "redirect:meals";
     }
 }
 
