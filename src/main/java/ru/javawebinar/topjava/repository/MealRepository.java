@@ -1,4 +1,3 @@
-
 package ru.javawebinar.topjava.repository;
 
 import org.springframework.lang.NonNull;
@@ -37,3 +36,4 @@ public interface MealRepository {
         throw new UnsupportedOperationException();
     }
 }
+

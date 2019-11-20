@@ -11,7 +11,7 @@ import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.Profiles.DATAJPA;
 import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
 
-@ActiveProfiles ( DATAJPA )
+@ActiveProfiles(DATAJPA)
 public class DataJpaMealServiceTest extends AbstractMealServiceTest {
     @Test
     public void getWithUser() throws Exception {
@@ -20,7 +20,7 @@ public class DataJpaMealServiceTest extends AbstractMealServiceTest {
         UserTestData.assertMatch(adminMeal.getUser(), UserTestData.ADMIN);
     }
 
-    @Test ( expected = NotFoundException.class )
+    @Test(expected = NotFoundException.class)
     public void getWithUserNotFound() throws Exception {
         service.getWithUser(1, ADMIN_ID);
     }

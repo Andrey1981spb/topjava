@@ -3,6 +3,8 @@ package ru.javawebinar.topjava.repository.inmemory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import ru.javawebinar.topjava.MealTestData;
+import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.Util;
@@ -21,6 +23,12 @@ public class InMemoryMealRepository implements MealRepository {
 
     // Map  userId -> mealRepository
     private Map<Integer, InMemoryBaseRepository<Meal>> usersMealsMap = new ConcurrentHashMap<>();
+
+    {
+        var userMeals = new InMemoryBaseRepository<Meal>();
+        usersMealsMap.put(UserTestData.USER_ID, userMeals);
+        MealTestData.MEALS.forEach(meal -> userMeals.map.put(meal.getId(), meal));
+    }
 
     @Override
     public Meal save(Meal meal, int userId) {
@@ -57,9 +65,7 @@ public class InMemoryMealRepository implements MealRepository {
     }
 
     @Override
-    public List<Meal> getBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
-        Objects.requireNonNull(startDateTime, "startDateTime must not be null");
-        Objects.requireNonNull(endDateTime, "endDateTime must not be null");
+    public List<Meal> getBetweenInclusive(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
         return getAllFiltered(userId, meal -> Util.isBetweenInclusive(meal.getDateTime(), startDateTime, endDateTime));
     }
 
