@@ -61,11 +61,11 @@ public class JspMealController extends AbstractController {
 
     @GetMapping ()
     public String getAll(Model model) {
-        model.addAttribute("meals", service.getAll(SecurityUtil.authUserId()));
+        model.addAttribute("meals", getAll());
         return "meals";
     }
 
-    @PostMapping ()
+    @PostMapping ("/")
     public String setMeals(HttpServletRequest request) {
         Meal meal = new Meal(
                 LocalDateTime.parse(request.getParameter("dateTime")),
@@ -77,7 +77,7 @@ public class JspMealController extends AbstractController {
         } else {
             service.update(meal, SecurityUtil.authUserId());
         }
-        return "redirect:meals";
+        return "redirect:/meals";
     }
 }
 

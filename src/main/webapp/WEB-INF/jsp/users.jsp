@@ -37,4 +37,4 @@
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
-© 2019 GitHub, Inc.
+
