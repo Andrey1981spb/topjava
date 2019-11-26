@@ -47,14 +47,14 @@ public abstract class AbstractMealServiceTest extends AbstractServiceTest {
         Meal created = service.create(newMeal, USER_ID);
         Integer newId = created.getId();
         newMeal.setId(newId);
-        assertMatch(created, newMeal);
-        assertMatch(service.get(newId, USER_ID), newMeal);
+        assertMatchMeal(created, newMeal);
+        assertMatchMeal(service.get(newId, USER_ID), newMeal);
     }
 
     @Test
     void get() throws Exception {
         Meal actual = service.get(ADMIN_MEAL_ID, ADMIN_ID);
-        assertMatch(actual, ADMIN_MEAL1);
+        assertMatchMeal(actual, ADMIN_MEAL1);
     }
 
     @Test
@@ -73,7 +73,7 @@ public abstract class AbstractMealServiceTest extends AbstractServiceTest {
     void update() throws Exception {
         Meal updated = getUpdated();
         service.update(updated, USER_ID);
-        assertMatch(service.get(MEAL1_ID, USER_ID), updated);
+        assertMatchMeal(service.get(MEAL1_ID, USER_ID), updated);
     }
 
     @Test
