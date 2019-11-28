@@ -44,7 +44,7 @@ class RootControllerTest extends AbstractControllerTest {
                         new AssertionMatcher<List<Meal>>() {
                             @Override
                             public void assertion(List<Meal> actual) throws AssertionError {
-                                assertMatch(actual, MEAL7, MEAL6, MEAL5, MEAL4, MEAL3, MEAL2, MEAL1);
+                                assertMatchMeal(actual, MEAL7, MEAL6, MEAL5, MEAL4, MEAL3, MEAL2, MEAL1);
                             }
                         }
                 ));

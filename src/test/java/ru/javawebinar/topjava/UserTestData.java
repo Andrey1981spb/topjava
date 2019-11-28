@@ -46,12 +46,7 @@ public class UserTestData {
     }
 
     public static ResultMatcher contentJson(User... expected) {
-        return new ResultMatcher() {
-            @Override
-            public void match(MvcResult result) throws Exception {
-                assertMatch(readListFromJsonMvcResult(result, User.class), List.of(expected));
-            }
-        };
+        return result -> assertMatch(readListFromJsonMvcResult(result, User.class), List.of(expected));
     }
 
     public static ResultMatcher contentJson(User expected) {

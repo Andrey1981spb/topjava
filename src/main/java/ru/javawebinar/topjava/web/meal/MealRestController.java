@@ -45,7 +45,8 @@ public class MealRestController extends AbstractMealController {
         return ResponseEntity.created(mealURL).body(created);
     }
 
-    @PostMapping ( value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE )
+    @PutMapping ( value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE )
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@RequestBody Meal meal, @PathVariable int id) {
         super.update(meal, id);
     }
@@ -57,6 +58,4 @@ public class MealRestController extends AbstractMealController {
                                    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime endTime) {
         return super.getBetween(startDate, startTime, endDate, endTime);
     }
-
-
 }

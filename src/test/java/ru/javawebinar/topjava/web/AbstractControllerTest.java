@@ -22,7 +22,7 @@ import javax.annotation.PostConstruct;
 })
 //@WebAppConfiguration
 //@ExtendWith(SpringExtension.class)
-//@Transactional
+@Transactional
 @ActiveProfiles(resolver = AllActiveProfileResolver.class)
 abstract public class AbstractControllerTest {
 
