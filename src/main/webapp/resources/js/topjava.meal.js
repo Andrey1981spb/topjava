@@ -35,4 +35,10 @@ $(function () {
     );
 });
 
-$function ()
+function getBetween() {
+    $.ajax({
+        type: "GET",
+        url: "ajax/profile/meals/filter",
+        data: $("#filter").serialize()
+    }).done(updateTable);
+}

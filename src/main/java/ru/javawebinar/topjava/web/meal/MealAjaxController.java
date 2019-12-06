@@ -20,19 +20,12 @@ import java.util.List;
 public class MealAjaxController extends AbstractMealController {
 
     @Override
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<MealTo> getAll() {
-        return super.getAll();
-    }
-
-    @Override
     @DeleteMapping ( "/{id}" )
     @ResponseStatus ( value = HttpStatus.NO_CONTENT )
     public void delete(@PathVariable int id) {
         super.delete(id);
     }
 
-    /*
     @Override
     @GetMapping ( produces = MediaType.APPLICATION_JSON_VALUE )
     public List<MealTo> getBetween(@RequestParam @Nullable LocalDate startDate,
@@ -41,7 +34,6 @@ public class MealAjaxController extends AbstractMealController {
                                    @RequestParam @Nullable LocalTime endTime) {
         return super.getBetween(startDate, startTime, endDate, endTime);
     }
-   */
 
     @PostMapping
     @ResponseStatus ( value = HttpStatus.NO_CONTENT )

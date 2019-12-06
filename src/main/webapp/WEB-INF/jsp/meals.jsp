@@ -12,24 +12,35 @@
 <section>
     <h3><spring:message code="meal.title"/></h3>
 
-    <form method="get" action="meals/filter">
-        <dl>
-            <dt><spring:message code="meal.startDate"/>:</dt>
-            <dd><input type="date" name="startDate" value="${param.startDate}"></dd>
-        </dl>
-        <dl>
-            <dt><spring:message code="meal.endDate"/>:</dt>
-            <dd><input type="date" name="endDate" value="${param.endDate}"></dd>
-        </dl>
-        <dl>
-            <dt><spring:message code="meal.startTime"/>:</dt>
-            <dd><input type="time" name="startTime" value="${param.startTime}"></dd>
-        </dl>
-        <dl>
-            <dt><spring:message code="meal.endTime"/>:</dt>
-            <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
-        </dl>
-        <button type="submit"><spring:message code="meal.filter"/></button>
+    <form id="detailsForm">
+        <div class="form-group">
+            <label for="startDate" class="col-form-label"><spring:message code="meal.startDate"/></label>
+            <input type="date" class="form-control" id="startDate" name="startDate"
+                   placeholder="<spring:message code="meal.startDate"/>">
+        </div>
+
+        <div class="form-group">
+            <label for="endDate" class="col-form-label"><spring:message code="meal.endDate"/></label>
+            <input type="date" class="form-control" id="endDate" name="endDate"
+                   placeholder="<spring:message code="meal.endDate"/>">
+        </div>
+
+        <div class="form-group">
+            <label for="startTime" class="col-form-label"><spring:message code="meal.startTime"/></label>
+            <input type="time" class="form-control" id="startTime" name="startTime"
+                   placeholder="<spring:message code="meal.startDate"/>">
+        </div>
+
+        <div class="form-group">
+            <label for="endTime" class="col-form-label"><spring:message code="meal.endTime"/></label>
+            <input type="time" class="form-control" id="endTime" name="endTime"
+                   placeholder="<spring:message code="meal.endTime"/>">
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="getBetween()">
+            <span class="fa fa-check"></span>
+            <spring:message code="meal.filter"/>
+        </button>
     </form>
 
 
@@ -65,55 +76,6 @@
                     </tr>
                 </c:forEach>
             </table>
-        </div>
-    </div>
-
-    <div class="modal fade" tabindex="-1" id="editRow">
-        <div class="container">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal" scope="request"/>
-                <%--    <h4 class="modal-title"><spring:message code="${meal.new ? 'meal.add' : 'meal.edit'}"/></h4> --%>
-                </div>
-                <div class="modal-body">
-                    <form id="detailsForm">
-                        <input type="hidden" name="id" value="id">
-
-                        <div class="form-group">
-                            <label for="dateTime" class="col-form-label"><spring:message code="meal.dateTime"/>:</label>
-                            <input type="datetime-local" class="form-control" id="dateTime" name="dateTime"
-                                   placeholder="<spring:message code="meal.dateTime"/>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="description" class="col-form-label"><spring:message
-                                    code="meal.description"/>:</label>
-                            <input type="text" class="form-control" id="description" name="description"
-                                   placeholder="<spring:message code="meal.description"/>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="calories" class="col-form-label"><spring:message code="meal.calories"/>:</label>
-                            <input type="number" class="form-control" id="calories" name="calories"
-                                   placeholder="<spring:message code="meal.calories"/>">
-                        </div>
-
-                    </form>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="save()">
-                        <span class="fa fa-check"></span>
-                        <spring:message code="common.save"/>
-                    </button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        <span class="fa fa-close"></span>
-                        <spring:message code="common.cancel"/>
-                    </button>
-                </div>
-
-            </div>
         </div>
     </div>
 
