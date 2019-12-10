@@ -32,24 +32,12 @@ $(function () {
                     },
                     {
                         "data": "email",
-                        "render": function (data, type, row) {
-                            if (type === "display") {
-                                return "<a href='mailto:" + data + "'>" + data + "</a>";
-                            }
-                            return data;
-                        }
                     },
                     {
                         "data": "roles"
                     },
                     {
                         "data": "enabled",
-                        "render": function (data, type, row) {
-                            if (type === "display") {
-                                return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='enable($(this)," + row.id + ");'/>";
-                            }
-                            return data;
-                        }
                     },
                     {
                         "data": "registered",
