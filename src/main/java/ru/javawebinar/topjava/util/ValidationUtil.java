@@ -58,6 +58,10 @@ public class ValidationUtil {
         return result;
     }
 
+    public static String getMessage(Throwable e) {
+        return e.getLocalizedMessage() != null ? e.getLocalizedMessage() : e.getClass().getName();
+    }
+
     private static final Validator validator;
 
     static {
