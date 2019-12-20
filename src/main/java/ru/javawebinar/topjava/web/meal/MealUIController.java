@@ -15,50 +15,45 @@ import java.time.LocalTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ajax/profile/meals")
+@RequestMapping ( "/ajax/profile/meals" )
 public class MealUIController extends AbstractMealController {
 
     @Override
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping ( produces = MediaType.APPLICATION_JSON_VALUE )
     public List<MealTo> getAll() {
         return super.getAll();
     }
 
     @Override
-    @GetMapping(value = "/{id}")
+    @GetMapping ( value = "/{id}" )
     public Meal get(@PathVariable int id) {
         return super.get(id);
     }
 
     @Override
-    @DeleteMapping(value = "/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") int id) {
+    @DeleteMapping ( value = "/{id}" )
+    @ResponseStatus ( value = HttpStatus.NO_CONTENT )
+    public void delete(@PathVariable ( "id" ) int id) {
         super.delete(id);
     }
 
     @PostMapping
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity<String> createOrUpdate(@Valid Meal meal, BindingResult result) {
-        if (result.hasErrors()) {
-            // TODO change to exception handler
-            return ValidationUtil.getErrorResponse(result);
-        }
+    @ResponseStatus ( value = HttpStatus.NO_CONTENT )
+    public void createOrUpdate(@Valid Meal meal) {
         if (meal.isNew()) {
             super.create(meal);
         } else {
             super.update(meal, meal.getId());
         }
-        return ResponseEntity.ok().build();
     }
 
     @Override
-    @GetMapping(value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping ( value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE )
     public List<MealTo> getBetween(
-            @RequestParam(value = "startDate", required = false) LocalDate startDate,
-            @RequestParam(value = "startTime", required = false) LocalTime startTime,
-            @RequestParam(value = "endDate", required = false) LocalDate endDate,
-            @RequestParam(value = "endTime", required = false) LocalTime endTime) {
+            @RequestParam ( value = "startDate", required = false ) LocalDate startDate,
+            @RequestParam ( value = "startTime", required = false ) LocalTime startTime,
+            @RequestParam ( value = "endDate", required = false ) LocalDate endDate,
+            @RequestParam ( value = "endTime", required = false ) LocalTime endTime) {
         return super.getBetween(startDate, startTime, endDate, endTime);
     }
 }

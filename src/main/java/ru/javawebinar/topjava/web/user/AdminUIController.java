@@ -13,45 +13,40 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ajax/admin/users")
+@RequestMapping ( "/ajax/admin/users" )
 public class AdminUIController extends AbstractUserController {
 
     @Override
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping ( produces = MediaType.APPLICATION_JSON_VALUE )
     public List<User> getAll() {
         return super.getAll();
     }
 
     @Override
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping ( value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE )
     public User get(@PathVariable int id) {
         return super.get(id);
     }
 
     @Override
-    @DeleteMapping("/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    @DeleteMapping ( "/{id}" )
+    @ResponseStatus ( value = HttpStatus.NO_CONTENT )
     public void delete(@PathVariable int id) {
         super.delete(id);
     }
 
     @PostMapping
-    public ResponseEntity<String> createOrUpdate(@Valid UserTo userTo, BindingResult result) {
-        if (result.hasErrors()) {
-            // TODO change to exception handler
-            return ValidationUtil.getErrorResponse(result);
-        }
+    public void createOrUpdate(@Valid UserTo userTo) {
         if (userTo.isNew()) {
             super.create(userTo);
         } else {
             super.update(userTo, userTo.id());
         }
-        return ResponseEntity.ok().build();
     }
 
     @Override
-    @PostMapping("/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    @PostMapping ( "/{id}" )
+    @ResponseStatus ( value = HttpStatus.NO_CONTENT )
     public void enable(@PathVariable int id, @RequestParam boolean enabled) {
         super.enable(id, enabled);
     }
