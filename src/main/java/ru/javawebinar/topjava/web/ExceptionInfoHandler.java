@@ -99,3 +99,4 @@ public class ExceptionInfoHandler {
                 details.length != 0 ? details : new String[]{ValidationUtil.getMessage(rootCause)});
     }
 }
+

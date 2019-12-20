@@ -167,3 +167,4 @@ abstract public class AbstractControllerTest {
         return jsonPath("$.details").value(getMessage(code));
     }
 }
+
