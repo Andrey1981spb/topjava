@@ -96,6 +96,11 @@ public class JdbcUserRepository implements UserRepository {
         return users;
     }
 
+    @Override
+    public User findByGoogleUsername(String googleUsername) {
+        return null;
+    }
+
     private void insertRoles(User u) {
         Set<Role> roles = u.getRoles();
         if (!CollectionUtils.isEmpty(roles)) {

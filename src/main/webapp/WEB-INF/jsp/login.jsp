@@ -26,6 +26,11 @@
                     <spring:message code="app.login"/> Admin
                 </button>
             </div>
+            <div class="col-md-5">
+                <a href="oauth2/google/authorize" role="button" class="btn btn-lg btn-info">
+                    Google
+                </a>
+            </div>
         </sec:authorize>
         <div class="lead py-4"><spring:message code="app.stackTitle"/> <br>
             <a href="http://projects.spring.io/spring-security/">Spring Security</a>,

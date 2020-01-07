@@ -1,6 +1,5 @@
 package ru.javawebinar.topjava.web.user;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -8,7 +7,6 @@ import ru.javawebinar.topjava.HasEmail;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 import ru.javawebinar.topjava.web.ExceptionInfoHandler;
-
 
 @Component
 public class UniqueMailValidator implements org.springframework.validation.Validator {

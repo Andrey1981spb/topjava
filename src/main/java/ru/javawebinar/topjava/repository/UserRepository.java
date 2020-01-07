@@ -19,6 +19,8 @@ public interface UserRepository {
 
     List<User> getAll();
 
+    User findByGoogleUsername(String googleUsername);
+
     default User getWithMeals(int id) {
         throw new UnsupportedOperationException();
     }

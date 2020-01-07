@@ -100,4 +100,9 @@ public class UserService implements UserDetailsService {
     public User getWithMeals(int id) {
         return checkNotFoundWithId(repository.getWithMeals(id), id);
     }
+
+
+    public User findByGoogleUsername(String googleUsername) {
+        return repository.findByGoogleUsername(googleUsername);
+    }
 }

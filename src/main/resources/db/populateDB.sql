@@ -3,9 +3,9 @@ DELETE FROM meals;
 DELETE FROM users;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
-INSERT INTO users (name, email, password, calories_per_day) VALUES
-('User', 'user@yandex.ru', '{noop}password', 2005),
-('Admin', 'admin@gmail.com', '{noop}admin', 1900);
+INSERT INTO users (name, googleName, googleUsername, email, password, calories_per_day) VALUES
+('User', 'empty1', 'empty2', 'user@yandex.ru', '{noop}password', 2005),
+('Admin', 'empty1', 'empty2','admin@gmail.com', '{noop}admin', 1900);
 
 INSERT INTO user_roles (role, user_id) VALUES
 ('ROLE_USER', 100000),

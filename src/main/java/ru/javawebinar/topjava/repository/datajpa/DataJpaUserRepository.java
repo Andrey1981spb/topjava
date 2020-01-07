@@ -41,7 +41,13 @@ public class DataJpaUserRepository implements UserRepository {
     }
 
     @Override
+    public User findByGoogleUsername(String googleUsername) {
+        return crudRepository.findByGoogleUsername(googleUsername);
+    }
+
+    @Override
     public User getWithMeals(int id) {
         return crudRepository.getWithMeals(id);
     }
+
 }

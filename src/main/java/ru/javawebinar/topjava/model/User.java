@@ -68,6 +68,21 @@ public class User extends AbstractNamedEntity implements HasEmail {
     @Range(min = 10, max = 10000)
     private int caloriesPerDay = DEFAULT_CALORIES_PER_DAY;
 
+    @Column(name = "googleName", nullable = false, unique = true)
+    @Email
+    @NotBlank
+    @Size(max = 100)
+    @SafeHtml(groups = {View.Web.class})
+    private String googleName;
+
+    @Column(name = "googleUsername", nullable = false, unique = true)
+    @Email
+    @NotBlank
+    @Size(max = 100)
+    @SafeHtml(groups = {View.Web.class})
+    private String googleUsername;
+
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")//, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OrderBy("dateTime DESC")
 //    @JsonIgnore
@@ -141,6 +156,22 @@ public class User extends AbstractNamedEntity implements HasEmail {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
+    }
+
+    public String getGoogleName() {
+        return googleName;
+    }
+
+    public void setGoogleName(String googleName) {
+        this.googleName = googleName;
+    }
+
+    public String getGoogleUsername() {
+        return googleUsername;
+    }
+
+    public void setGoogleUsername(String googleUsername) {
+        this.googleUsername = googleUsername;
     }
 
     public List<Meal> getMeals() {
